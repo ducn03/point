@@ -69,7 +69,7 @@
       }
 
       input[type="number"]:focus {
-        border-color: green; 
+        border-color: green;
         outline: 0;
       }
 
@@ -114,6 +114,7 @@
                 min="0"
                 max="10"
                 onchange="calculateTotal()"
+                oninput="validateInput(this)"
               />
             </td>
           </tr>
@@ -127,6 +128,7 @@
                 min="0"
                 max="10"
                 onchange="calculateTotal()"
+                oninput="validateInput(this)"
               />
             </td>
           </tr>
@@ -140,6 +142,7 @@
                 min="0"
                 max="10"
                 onchange="calculateTotal()"
+                oninput="validateInput(this)"
               />
             </td>
           </tr>
@@ -153,6 +156,7 @@
                 min="0"
                 max="10"
                 onchange="calculateTotal()"
+                oninput="validateInput(this)"
               />
             </td>
           </tr>
@@ -173,11 +177,44 @@
         var file = parseFloat(document.getElementById("file").value) || 0;
         var answer = parseFloat(document.getElementById("answer").value) || 0;
 
+        // Kiểm tra nếu giá trị nhập vào nằm ngoài phạm vi từ 0 đến 10
+        if (content < 0 || content > 10 || isNaN(content)) {
+          alert("Vui lòng nhập giá trị từ 0 đến 10 cho nội dung chuyên môn.");
+          document.getElementById("content").value = "";
+          return;
+        }
+        if (present < 0 || present > 10 || isNaN(present)) {
+          alert("Vui lòng nhập giá trị từ 0 đến 10 cho kỹ năng thuyết minh.");
+          document.getElementById("present").value = "";
+          return;
+        }
+        if (file < 0 || file > 10 || isNaN(file)) {
+          alert("Vui lòng nhập giá trị từ 0 đến 10 cho file mềm hỗ trợ.");
+          document.getElementById("file").value = "";
+          return;
+        }
+        if (answer < 0 || answer > 10 || isNaN(answer)) {
+          alert("Vui lòng nhập giá trị từ 0 đến 10 cho trả lời câu hỏi.");
+          document.getElementById("answer").value = "";
+          return;
+        }
+
         var total =
           content * 0.55 + present * 0.25 + file * 0.15 + answer * 0.05;
 
         document.getElementById("total").textContent = total.toFixed(2);
         document.getElementById("totalDisplay").textContent = total.toFixed(2);
+      }
+
+      function validateInput(input) {
+        if (input.value !== "") {
+          var value = parseFloat(input.value);
+          if (!isNaN(value) && value >= 1 && value <= 10) {
+            input.value = value;
+          } else {
+            input.value = "";
+          }
+        }
       }
     </script>
   </body>

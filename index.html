@@ -10,12 +10,14 @@
         margin: 0;
         padding: 0;
         background-color: #f4f4f4;
+        transition: background-color 0.3s;
       }
 
       h1 {
         text-align: center;
         margin-top: 20px;
         color: #333;
+        transition: color 0.3s;
       }
 
       .container {
@@ -24,15 +26,17 @@
         align-items: center;
         margin-left: 10%;
         margin-right: 10%;
+        transition: margin 0.3s;
       }
 
       table {
-        width: 500px;
+        width: 90%;
         margin: 20px auto;
         border-collapse: collapse;
         background-color: #fff;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s;
       }
 
       th,
@@ -53,34 +57,31 @@
       }
 
       input[type="number"] {
-        width: 60px;
-        padding: 5px;
+        width: 90%;
+        padding: 10px;
         border: 1px solid #ccc;
         border-top: 0;
-        border-right: 0;
         border-left: 0;
+        border-right: 0;
         border-radius: 3px;
         text-align: center;
-        transition: 0.3s;
-      }
-
-      input[type="number"]:hover {
-        border-color: #999;
+        font-size: 1.2em;
       }
 
       input[type="number"]:focus {
-        border-color: green;
+        border-bottom: 1px solid #333;
         outline: 0;
       }
 
       #total {
         font-weight: bold;
+        font-size: 1.2em;
       }
 
       #totalDisplay {
         font-weight: bold;
         color: red;
-        font-size: xx-large;
+        font-size: 1.5em;
       }
 
       div {
@@ -88,13 +89,9 @@
         margin-top: 20px;
       }
 
-      @media only screen and (max-width: 768px) {
+      @media only screen and (min-width: 768px) {
         table {
-          width: 100%;
-        }
-
-        input[type="number"] {
-          width: 100%;
+          width: 500px;
         }
       }
     </style>
@@ -177,7 +174,6 @@
         var file = parseFloat(document.getElementById("file").value) || 0;
         var answer = parseFloat(document.getElementById("answer").value) || 0;
 
-        // Kiểm tra nếu giá trị nhập vào nằm ngoài phạm vi từ 0 đến 10
         if (content < 0 || content > 10 || isNaN(content)) {
           alert("Vui lòng nhập giá trị từ 0 đến 10 cho nội dung chuyên môn.");
           document.getElementById("content").value = "";
@@ -209,7 +205,7 @@
       function validateInput(input) {
         if (input.value !== "") {
           var value = parseFloat(input.value);
-          if (!isNaN(value) && value >= 1 && value <= 10) {
+          if (!isNaN(value) && value >= 0 && value <= 10) {
             input.value = value;
           } else {
             input.value = "";
